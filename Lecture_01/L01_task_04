@@ -1,0 +1,25 @@
+# zadanie 4
+
+U = {'👻', '🕵', '🔺', '🐉', '🐍', '🦂', '🔥', '🌻', '🐙', '🌌'}
+
+a = list(U)
+
+def powerSet(ls):
+    setset = [[]]
+    for x in ls:
+        newsubsets = [subset + [x] for subset in setset]
+        setset.extend(newsubsets)
+    return setset
+
+result = powerSet(a)   
+
+reslist = list()
+for rec in result:
+    res = frozenset(rec)
+    reslist.append(res)
+ 
+result = set(reslist) 
+print(result)
+
+
+assert frozenset(('👻', '🕵', '🔺', '🐉', '🐍', '🦂', '🔥', '🌻', '🐙', '🌌')) in result
