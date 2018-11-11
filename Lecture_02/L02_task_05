@@ -1,0 +1,58 @@
+# zadanie 5
+
+def prime(x):
+
+    isPrime = None
+    
+    if isinstance(x, int) and x > 1:
+                    
+        for divider in range(2, x):                
+            if x % divider == 0:
+                isPrime = False
+                break
+
+        else:
+            isPrime = True
+            
+    elif x == 1:
+        isPrime = False
+       
+    return isPrime
+
+print(prime(2))
+print(prime("22"))
+
+assert prime(101) == True
+assert prime("22") == None
+
+
+
+def twins(x, y = None):  
+
+               
+    if prime(x) and isinstance(x, int) and (isinstance(y, int) or y == None) :
+        
+        if prime(y):
+            
+            if y == x + 2 or y == x - 2:
+                return True
+            
+        if prime(x + 2):
+            return (x + 2)
+                    
+        elif prime(x - 2):
+            return (x - 2)
+        
+        else:
+            return False
+        
+    else:
+        return None
+
+
+assert prime(101) == True
+assert prime("22") == None
+
+assert twins(101) == 103
+assert twins(79) == False
+assert twins(5, 7) == True
