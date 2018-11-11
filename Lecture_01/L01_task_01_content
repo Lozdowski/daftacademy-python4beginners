@@ -1,0 +1,11 @@
+Stwórz listę liczb od 0 do 999.
+
+Liczby podzielne przez 3 zastąp słowem 'Daftcode.
+Liczby podzielne przez 5 zastąp słowem 'Loves'.
+Liczby podzielne przez 7 zastąp słowem 'Python.
+Liczby podzielne jednocześnie przez 3 i 5 zastąp słowem 'DaftcodeLoves'
+Liczby podzielne jednocześnie przez 5 i 7 zastąp słowem 'LovesPython'.
+Liczby podzielne jednocześnie przez 3 i 7 zastąp słowem 'DaftcodePython'.
+Liczby podzielne jednocześnie przez 3, 5 i 7 zastąp słowem 'DaftcodeLovesPython'.
+
+Wynikową listę przypisz zmiennej result.
