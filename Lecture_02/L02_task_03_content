@@ -1,0 +1,5 @@
+Instructions from your teacher:
+Zadanie 3
+Napisz funkcję char_frequency, która przyjmuje jako argument string.
+Dla podanego stringa funkcja musi zliczyć ile razy wystąpiła każda litera.
+Zwróc wynik jako słownik wartości ile razy wystąpił każdy znak, gdzie klucz to występujący znak a wartścią jest liczba wystąpień tego znaku.
