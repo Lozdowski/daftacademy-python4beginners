@@ -1,0 +1,19 @@
+# zadanie 3
+
+days = {
+  1: 'Poniedziałek',
+  2: 'Wtorek',
+  3: 'Środa',
+  4: 'Czwartek',
+  5: 'Piątek',
+  6: 'Sobota',
+  7: 'Niedziela'
+}
+result = {}
+
+for k in days:
+  result[days[k]]=k
+
+#result = {y:x for x,y in days.items()}#
+
+assert 'Poniedziałek' in result
