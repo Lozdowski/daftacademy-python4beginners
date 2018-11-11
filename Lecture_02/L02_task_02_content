@@ -1,0 +1,5 @@
+Instructions from your teacher:
+Zadanie 2
+Napisz funkcję reduce.
+Funkcja ma na celu sumowanie kolejnych par elementów zadanej listy i zwrócenie listy sum kolejnych par.
+Jeżeli lista ma nieparzystą długość, ostatni element zostaje przepisany od listy wynikowej na ostatniej pozycji.
