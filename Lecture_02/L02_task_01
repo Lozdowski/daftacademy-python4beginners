@@ -1,0 +1,12 @@
+# zadanie 1
+
+def power(n, p=2):
+  if n>=0 and n % 1 ==0 and p>=0:
+    result = n**p 
+    return result
+
+power(7)
+
+assert power(5) == 25
+assert power(5, 3) == 125
+
