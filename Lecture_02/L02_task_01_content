@@ -1,0 +1,5 @@
+Instructions from your teacher:
+Zadanie 1
+Napisz funkcję power, która dla danego n i p zwraca w wyniku n podniesione do potęgi p.
+Domyślna wartość argumentu p to 2.
+Załóż, że n i p będą liczbami całkowitymi >= 0.
