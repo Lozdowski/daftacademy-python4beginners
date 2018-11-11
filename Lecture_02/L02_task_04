@@ -1,0 +1,21 @@
+# zadanie 4
+
+
+def fibonacci_list(n):
+    list = []
+    if n == 0:
+        list = []
+        return list
+    elif n== 1:
+        list = [n]
+        return list
+    else:
+        list = [1,1]
+        for i in range(2, n):
+            list.append(list[i-1] + list[i-2])
+    return list
+        
+
+
+
+assert fibonacci_list(7) == [1, 1, 2, 3, 5, 8, 13]
