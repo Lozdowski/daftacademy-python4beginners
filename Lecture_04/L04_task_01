@@ -1,0 +1,285 @@
+import math
+
+class MyError(Exception):
+    pass
+
+class InvalidOperandError(MyError):
+    pass
+
+class InvalidInputOperandError(MyError):
+    pass
+
+class OperationNotSupportedError(MyError):
+    pass
+
+class MyFraction:        
+     
+    def __init__(self, numerator, denominator = 1):
+        if not type(numerator) == int and not type(numerator) == MyFraction:
+            raise InvalidInputOperandError()
+        if not type(denominator) == int and not type(denominator) == MyFraction:
+            raise InvalidInputOperandError()
+ 
+        if isinstance(numerator, MyFraction):
+            self.numerator = numerator.numerator
+            self.denominator = numerator.denominator
+            
+        elif isinstance(denominator, MyFraction):
+            self.numerator = numerator * denominator.denominator
+            self.denominator = denominator.numerator
+            
+        elif isinstance(numerator, int):
+            self.numerator = numerator
+            self.denominator = denominator
+            self._reduce()
+                          
+    def __pow__(self, other):
+        raise OperationNotSupportedError()
+
+    def __floordiv__(self, other):
+        raise OperationNotSupportedError()
+    
+    def __lshift__(self, other):
+        raise OperationNotSupportedError()
+
+    def __rshift__(self, other):
+        raise OperationNotSupportedError()
+                      
+    def _reduce(self):
+        
+        if not isinstance(self, (int, float, MyFraction)):
+            raise InvalidOperandError()
+            
+        if isinstance(self.numerator, int) and isinstance(self.denominator, int):
+            nd_gcd = math.gcd(
+                self.numerator, self.denominator
+            )
+            self.numerator //= nd_gcd
+            self.denominator //= nd_gcd
+
+    def _inner_add(self, other):
+       
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        if not type(other) == MyFraction:
+            other = MyFraction(other)
+        # a/b + c/d = (a*d + c*b)/(b*d) = g/h
+        a = self.numerator
+        b = self.denominator
+        c = other.numerator
+        d = other.denominator
+        g = a*d + c*b
+        h = b*d
+        return g, h
+
+    def __add__(self, other):
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        if isinstance(other, float):            
+            return (self.numerator / self.denominator + other)
+                          
+        else:
+            g, h = self._inner_add(other)
+            return MyFraction(g, h)
+        
+    def _inner_sub(self, other):
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        other = MyFraction(other)
+        # a/b - c/d = (a*d - c*b)/(b*d) = g/h
+        a = self.numerator
+        b = self.denominator
+        c = other.numerator
+        d = other.denominator
+        g = a*d - c*b
+        g = g
+        h = b*d
+        return g, h
+    
+    def __sub__(self, other):
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        if isinstance(other, float):            
+            return (self.numerator / self.denominator) - other
+        else:
+            g, h = self._inner_sub(other)   
+            return MyFraction(g, h)
+
+    def __rsub__(self, other):
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        if isinstance(other, float):            
+            return other - (self.numerator / self.denominator)
+        else:
+            other = MyFraction(other)
+            return other - self
+
+       
+    def __mul__(self, other):
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        if isinstance(other, float):            
+            return (self.numerator / self.denominator * other)
+        else:
+            other = MyFraction(other)
+            g = self.numerator * other.numerator
+            h = self.denominator * other.denominator
+            return MyFraction(g, h)
+    
+
+    def __truediv__(self, other):
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        if isinstance(other, float):            
+            return (self.numerator / self.denominator / other)
+        if isinstance(other, MyFraction):
+            g = self.numerator * other.denominator
+            h = self.denominator * other.numerator
+            return MyFraction(g, h)
+        else:
+            g = self.numerator
+            h = self.denominator * other
+            return MyFraction(g, h)
+        
+    def __rtruediv__(self, other):
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        if isinstance(other, float):
+            result = other / (self.numerator/self.denominator)
+            return result
+        else:
+            g = other.numerator
+            h = other.denominator * self
+            return MyFraction(g, h)
+
+    def __eq__(self, other):
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        if isinstance(other, MyFraction):
+            return (
+                self.numerator == other.numerator
+                and self.denominator == other.denominator
+            )
+
+    def __iadd__(self, other):
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        if isinstance(other, float):            
+            return (self.numerator / self.denominator + other)
+        else:
+            self.numerator, self.denominator = self._inner_add(other)
+            self._reduce()
+            return self
+        
+    def __isub__(self, other):
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        if isinstance(other, float):            
+            return (self.numerator / self.denominator - other)
+        else:
+            self.numerator, self.denominator = self._inner_sub(other)
+            self._reduce()
+            return self
+
+    def __imul__(self, other):
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        if isinstance(other, float):
+            x = self.numerator / self.denominator
+            return x * other
+        else:
+            self.numerator = self.numerator * other.numerator
+            self.denominator = self.denominator * other.denominator
+            self._reduce()
+            return self
+
+    def __itruediv__(self, other):        
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        if isinstance(other, float):
+            x = self.numerator / self.denominator
+            return x / other
+        else:
+            other = MyFraction(other)
+            self.numerator = self.numerator * other.denominator
+            self.denominator = self.denominator * other.numerator 
+            self._reduce()
+            return self
+       
+    
+    def __radd__(self, other):
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        return self + other
+
+    def __rmul__(self, other):        
+        if not other:
+            raise InvalidOperandError()
+        if not type(self) == MyFraction:
+            raise InvalidOperandError()        
+        if not type(other) == int and not type(other) == MyFraction and not type(other) == float:
+            raise InvalidOperandError()
+        return self * other
+
+    def __repr__(self):
+        return '{}(numerator={}, denominator={})'.format(
+            self.__class__.__name__,
+            self.numerator,
+            self.denominator
+            )
