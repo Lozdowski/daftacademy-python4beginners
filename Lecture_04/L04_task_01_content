@@ -1,0 +1,43 @@
+Instructions from your teacher:
+Dla modelowej lub swojej klasy MyFraction dodaj walidację wejścia i przetwarzania.
+Tym razem oczekujemy że MyFraction będzie obsługiwać nie tylko dodawanie ale również:
+    odejmowanie
+    mnożenie
+    dzielenie
+
+MyFraction ma nie działać z "podwójnymi" operatorami np ** // i rzucać odpowiednim wyjątkiem
+Jak i przekazywanie ułamków jako licznik czy mianownik.
+Przykład:
+    MyFraction(1, 2) * MyFraction(1, 2) == MyFraction(1, 4)
+    MyFraction(numerator=1, denominator=MyFraction(1,2)) == MyFraction(2, 1)
+    MyFraction(2, 3) / MyFraction(1, 3) == MyFraction(2, 1)
+
+
+Klasa MyFraction powinna też móc się dodawać, odejmować, mnożyć i dzielić
+    z liczbami zmiennoprzecinkowymi ale:
+    nie musi ich przyjmować jako argumenty
+    wynik operacji z operandem typu float jest typu float
+    MyFraction można przedstawić w notacji zmiennoprzecinkowej
+Przykład:
+    0.5 + MyFraction(1, 2) == 1.0
+    float(MyFraction(3, 20)) == 0.15
+
+Dodatkowo wejście może nie być poprawne.
+Z tego powodu klasa MyFraction powinna walidować wejściowe parametry i ich poprawność.
+
+By to osiągnąć zaimplementuj następujące wyjątki dziedziczące po wbudowanych wyjątkach:
+    InvalidOperandError
+    InvalidInputOperandError
+    OperationNotSupportedError
+
+Przykład:
+    MyFraction(5, 4) + "10"   #  <- ten test ma rzucić wyjątkiem InvalidOperand
+    MyFraction(5, [12])       #  <- ten test ma rzucić wyjątkiem InvalidInputOperand
+    MyFraction(99, 100)**2    #  <- ten test ma rzucić wyjątkiem OperationNotSupported
+
+Klasa MyFraction nie musi obsługiwać liczb ujemnych - w testach nigdy nie dojdzie do sytuacji gdzie wynik operacji matematycznej jest ujemny.
+
+Pamiętaj jednak że wszystkie dotychczasowej operacje na MyFraction z Zadania 3.1 powinny
+wciąż działać.
+
+UWAGA: Testy porównujące ze sobą floaty są wykonywane z domyślną dokładnością funkcji assertAlmostEqual z frameworku unittest tj z dokładnością do 7mego miejsca po przecinku
