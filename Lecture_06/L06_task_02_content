@@ -1,0 +1,10 @@
+Instructions from your teacher:
+ZADANIE 2: walidacja wartości id_number 
+Napisz funkcję validate_id_number, która przyjmuje id_number (str) oraz zwraca wartość typu bool:
+True, jeśli id_number jest zgodny ze specyfikacją opisaną w zadaniu 1
+False, jeśli nie jest zgodny
+
+Uwagi: 
+Funkcja ma sprawdzać wyłącznie poprawność przekazanej wartości, nie ma robić nic więcej (jak na przykład sprawdzanie unikalności).
+Funkcja ma być przygotowana, by poprawnie walidować wszystkie wartości id_number z pliku personal_data_homework.csv.
+Dodatkowo ma sobie radzić z wartościami zepsutymi na wiele innych sposobów, w tym takich, które nie nadają się do oczyszczenia (np. z brakującymi danymi).
