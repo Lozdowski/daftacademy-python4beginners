@@ -1,0 +1,16 @@
+Instructions from your teacher:
+ZADANIE 4: wyznaczanie mediany monthly_salary pięciu najkosztowniejszych pracowników w danym dziale 
+Napisz funkcję median_of_top_five, która przyjmuje: 
+filename – nazwę pliku CSV, w którym mamy dane (struktura pliku będzie taka sama jak na zajęciach),
+department_name – dwuliterowy skrót nazwy działu firmy, pisany wielkimi literami. 
+
+Funkcja ma zwracać wartość `Decimal` z medianą wynagrodzeń pięciu najlepiej zarabiających pracowników firmy w danym dziale.
+
+UPDATE: działu szukamy w kolumnie `department`, a nie wyciągamy go z `id_number`. Zatem jeśli brakuje wartości pod `department`, to ignorujemy ten wiersz.
+
+UPDATE 2: zadaniem tej funkcji nie jest radzenie sobie z duplikatami. Zatem nie usuwamy duplikatów. Jeśli wiersz powtórzony, to traktujemy je jako dwa różne wiersze.
+
+Uwagi: 
+Dane walutowe w pliku (kolumna monthly_salary) są do oczyszczenia. Niestety będą miały dodatkowe “brudy” względem tych
+pokazanych na zajęciach. Brudy te trzeba zaleźć i usunąć. Będą również puste wartości, należy je zignorować (nie mają wartości zero!).
+W trakcie czyszczenia dane mają być zaokrąglane do dwóch miejsc po przecinku, tak jak na zajęciach. 
